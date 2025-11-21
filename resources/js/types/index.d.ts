@@ -22,6 +22,28 @@ export interface NavItem {
     isActive?: boolean;
 }
 
+export type PageProps<T = Record<string, unknown>> = {
+    auth?: {
+        user: User | null;
+    };
+    flash?: {
+        success?: string;
+        error?: string;
+    };
+    errors?: Record<string, string>;
+} & T;
+
+export interface PaginationLink {
+    url: string | null;
+    label: string;
+    active: boolean;
+}
+
+export interface Paginated<T> {
+    data: T[];
+    links: PaginationLink[];
+}
+
 export interface SharedData {
     name: string;
     quote: { message: string; author: string };
