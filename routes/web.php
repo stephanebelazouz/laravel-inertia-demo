@@ -17,6 +17,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 
     Route::get('users', [UsersController::class, 'index'])->name('users.index');
+    Route::get('users/create', [UsersController::class, 'create'])->name('users.create');
 });
 
 require __DIR__ . '/settings.php';

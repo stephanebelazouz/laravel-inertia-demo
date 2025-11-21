@@ -18,7 +18,7 @@ import {
 
 import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/app-layout';
-import { index } from '@/routes/users';
+import { create, index } from '@/routes/users';
 import { BreadcrumbItem, PageProps, Paginated, User } from '@/types';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -37,9 +37,14 @@ export default function Index() {
             <div className="p-6">
                 <Card className="shadow-sm">
                     <CardHeader>
-                        <CardTitle className="text-xl">
-                            Registred users
-                        </CardTitle>
+                        <div className="flex justify-between">
+                            <CardTitle className="text-xl">
+                                Registred users
+                            </CardTitle>
+                            <Link href={create().url}>
+                                <Button>Add user</Button>
+                            </Link>
+                        </div>
                     </CardHeader>
 
                     <CardContent>
