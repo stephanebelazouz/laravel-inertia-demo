@@ -112,4 +112,27 @@ return [
 
     'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
 
+     /*
+    |--------------------------------------------------------------------------
+    | Password Complexity
+    |--------------------------------------------------------------------------
+    |
+    | The regex is used to validate password strength.
+    | Example:
+    | - At least one uppercase
+    | - At least one lowercase
+    | - At least one digit
+    | - Minimum 8 characters
+    |  
+    | The description is for display expectation to user
+    */
+    'password_rules' => [
+        'regex' => '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/',
+        'description' => [
+            "At least one uppercase",
+            "At least one lowercase",
+            "At least one digit",
+            "Minimum 8 characters"
+        ]
+    ],
 ];

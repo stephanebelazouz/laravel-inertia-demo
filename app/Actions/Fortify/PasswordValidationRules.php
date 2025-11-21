@@ -3,6 +3,7 @@
 namespace App\Actions\Fortify;
 
 use Illuminate\Validation\Rules\Password;
+use App\Rules\PasswordComplexityRule;
 
 trait PasswordValidationRules
 {
@@ -13,6 +14,16 @@ trait PasswordValidationRules
      */
     protected function passwordRules(): array
     {
-        return ['required', 'string', Password::default(), 'confirmed'];
+        $config = config('auth.password_rules');
+
+        return [
+            'required',
+            'string',
+            new PasswordComplexityRule(
+                regex: $config['regex'],
+                description: $config['description']
+            ),
+            'confirmed'
+        ];
     }
 }
