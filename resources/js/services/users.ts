@@ -45,7 +45,7 @@ export const UsersService = {
     },
 
     delete: async (id: number) => {
-        await http.delete(`/api//users/${id}`);
+        await http.delete(`/api/users/${id}`);
     },
 
     find: async (id: number) => {

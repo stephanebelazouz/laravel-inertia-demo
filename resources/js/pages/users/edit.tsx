@@ -8,12 +8,14 @@ import {
 } from '@/components/ui/card';
 import AppLayout from '@/layouts/app-layout';
 import { create, index } from '@/routes/users';
-import { Head } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 
+import { DeleteModalConfirmation } from '@/components/delete-modal-confirmation';
 import UserForm from '@/forms/user-form';
 import { UserCreatePayload, UsersService } from '@/services/users';
 import { BreadcrumbItem, User } from '@/types';
 import { Link } from '@inertiajs/react';
+import { ArrowLeft } from 'lucide-react';
 import { toast } from 'sonner';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -42,6 +44,16 @@ export default function Edit({ user }: { user: User }) {
         }
     };
 
+    const handleDelete = async () => {
+        try {
+            await UsersService.delete(user.id);
+            toast.success('User deleted successfully');
+            router.visit('/users'); // redirection Inertia
+        } catch (err: any) {
+            toast.error(err.response?.data?.message || 'Unable to delete user');
+        }
+    };
+
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Users create" />
@@ -52,9 +64,17 @@ export default function Edit({ user }: { user: User }) {
                             <CardTitle className="text-xl">
                                 Edit user {user.lastname} {user.firstname}
                             </CardTitle>
-                            <Link href={index().url}>
-                                <Button>Back</Button>
-                            </Link>
+                            <div className="flex gap-4">
+                                <DeleteModalConfirmation
+                                    callback={handleDelete}
+                                />
+                                <Link href={index().url}>
+                                    <Button>
+                                        <ArrowLeft />
+                                        Back
+                                    </Button>
+                                </Link>
+                            </div>
                         </div>
                     </CardHeader>
 
