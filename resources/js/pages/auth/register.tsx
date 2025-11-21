@@ -27,19 +27,37 @@ export default function Register() {
                     <>
                         <div className="grid gap-6">
                             <div className="grid gap-2">
-                                <Label htmlFor="name">Name</Label>
+                                <Label htmlFor="firstname">Firstname</Label>
                                 <Input
-                                    id="name"
+                                    id="firstname"
                                     type="text"
                                     required
                                     autoFocus
                                     tabIndex={1}
-                                    autoComplete="name"
-                                    name="name"
-                                    placeholder="Full name"
+                                    autoComplete="firstname"
+                                    name="firstname"
+                                    placeholder="First name"
                                 />
                                 <InputError
-                                    message={errors.name}
+                                    message={errors.firstname}
+                                    className="mt-2"
+                                />
+                            </div>
+
+                            <div className="grid gap-2">
+                                <Label htmlFor="lastname">Lastname</Label>
+                                <Input
+                                    id="lastname"
+                                    type="text"
+                                    required
+                                    autoFocus
+                                    tabIndex={1}
+                                    autoComplete="lastname"
+                                    name="lastname"
+                                    placeholder="Lastname"
+                                />
+                                <InputError
+                                    message={errors.lastname}
                                     className="mt-2"
                                 />
                             </div>

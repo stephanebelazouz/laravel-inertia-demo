@@ -51,21 +51,40 @@ export default function Profile({
                         {({ processing, recentlySuccessful, errors }) => (
                             <>
                                 <div className="grid gap-2">
-                                    <Label htmlFor="name">Name</Label>
+                                    <Label htmlFor="firstname">Firstname</Label>
 
                                     <Input
-                                        id="name"
+                                        id="firstname"
                                         className="mt-1 block w-full"
-                                        defaultValue={auth.user.name}
-                                        name="name"
+                                        defaultValue={auth.user.firstname}
+                                        name="firstname"
                                         required
-                                        autoComplete="name"
-                                        placeholder="Full name"
+                                        autoComplete="firstname"
+                                        placeholder="First name"
                                     />
 
                                     <InputError
                                         className="mt-2"
-                                        message={errors.name}
+                                        message={errors.firstname}
+                                    />
+                                </div>
+
+                                <div className="grid gap-2">
+                                    <Label htmlFor="lastname">Lastname</Label>
+
+                                    <Input
+                                        id="lastname"
+                                        className="mt-1 block w-full"
+                                        defaultValue={auth.user.lastname}
+                                        name="lastname"
+                                        required
+                                        autoComplete="lastname"
+                                        placeholder="Last name"
+                                    />
+
+                                    <InputError
+                                        className="mt-2"
+                                        message={errors.lastname}
                                     />
                                 </div>
 
