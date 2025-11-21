@@ -29,7 +29,7 @@ class UserUpdateRequest extends FormRequest
             'firstname' => ['sometimes', 'required', 'string', 'max:255'],
             'lastname'  => ['sometimes', 'required', 'string', 'max:255'],
             'email'     => ['sometimes', 'required', 'email', 'max:255'],
-            'password'  => ['required', new PasswordComplexityRule($config['regex'], $config['description']), 'confirmed'],
+            'password'  => ['sometimes', new PasswordComplexityRule($config['regex'], $config['description']), 'confirmed'],
         ];
     }
 

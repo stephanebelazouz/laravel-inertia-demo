@@ -12,8 +12,8 @@ import { Head } from '@inertiajs/react';
 
 import UserForm from '@/forms/user-form';
 import { UserCreatePayload, UsersService } from '@/services/users';
-import { BreadcrumbItem } from '@/types';
-import { Link, router } from '@inertiajs/react';
+import { BreadcrumbItem, User } from '@/types';
+import { Link } from '@inertiajs/react';
 import { toast } from 'sonner';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -27,12 +27,11 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-export default function Create() {
+export default function Edit({ user }: { user: User }) {
     const handleSubmit = async (data: UserCreatePayload) => {
         try {
-            await UsersService.create(data);
-            toast.success('User created successfully!');
-            router.visit('/users');
+            await UsersService.update(user.id, data);
+            toast.success('User updated successfully!');
         } catch (err: unknown) {
             console.error('Error creating user:', err);
             if (err.response?.status === 422) {
@@ -51,7 +50,7 @@ export default function Create() {
                     <CardHeader>
                         <div className="flex justify-between">
                             <CardTitle className="text-xl">
-                                Create user
+                                Edit user {user.lastname} {user.firstname}
                             </CardTitle>
                             <Link href={index().url}>
                                 <Button>Back</Button>
@@ -60,7 +59,11 @@ export default function Create() {
                     </CardHeader>
 
                     <CardContent>
-                        <UserForm onSubmit={handleSubmit} />
+                        <UserForm
+                            onSubmit={handleSubmit}
+                            defaultValues={user}
+                            mode="update"
+                        />
                     </CardContent>
                     <CardFooter></CardFooter>
                 </Card>

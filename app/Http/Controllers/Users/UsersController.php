@@ -30,18 +30,17 @@ class UsersController extends Controller
         ]);
     }
 
-    public function store(UserCreateRequest $request)
+    public function edit(User $user)
     {
-        $user = User::create([
-            'firstname' => $request['firstname'],
-            'lastname'  => $request['lastname'],
-            'email'     => $request['email'],
-            'password'  => Hash::make($request['password']),
+        return Inertia::render('users/edit', [
+            'user' => $user
         ]);
+    }
 
-        return response()->json([
-            'message' => 'User created successfully',
-            'user' => $user,
-        ], 201);
+    public function show(User $user)
+    {
+        return Inertia::render('users/show', [
+            'user' => $user
+        ]);
     }
 }

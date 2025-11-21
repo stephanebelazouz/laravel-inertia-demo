@@ -18,6 +18,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('users', [UsersController::class, 'index'])->name('users.index');
     Route::get('users/create', [UsersController::class, 'create'])->name('users.create');
+    Route::get('/users/{user}/edit', [UsersController::class, 'edit'])
+        ->name('users.edit');
+    Route::get('/users/{user}', [UsersController::class, 'show'])
+        ->name('users.show');
 });
 
 require __DIR__ . '/settings.php';
