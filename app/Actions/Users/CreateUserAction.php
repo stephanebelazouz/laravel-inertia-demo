@@ -1,22 +1,21 @@
 <?php
 
-namespace App\Actions\Fortify;
+namespace App\Actions\Users;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use Laravel\Fortify\Contracts\CreatesNewUsers;
+use App\Rules\PasswordComplexityRule;
 
-class CreateNewUser implements CreatesNewUsers
+class CreateUserAction
 {
-    use PasswordValidationRules;
 
     /**
      * Validate and create a newly registered user.
      *
      * @param  array<string, string>  $input
      */
-    public function create(array $input): User
+    public function __invoke(array $input): User
     {
         Validator::make($input, [
             'firstname' => ['required', 'string', 'max:255'],
@@ -28,7 +27,7 @@ class CreateNewUser implements CreatesNewUsers
                 'max:255',
                 Rule::unique(User::class),
             ],
-            'password' => $this->passwordRules(),
+            'password' => [PasswordComplexityRule::fromConfig()],
         ])->validate();
 
         return User::create([

@@ -1,27 +1,34 @@
 <?php
 
 use App\Rules\PasswordComplexityRule;
+use Illuminate\Support\Facades\Validator;
 
 it('accepts a valid password', function () {
     $rule = new PasswordComplexityRule(
         regex: '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/',
-        description: ['Test rule']
+        description: []
     );
 
-    expect(
-        $rule->validate('password', 'Valid123', fn () => throw new Exception('Invalid'))
-    )->toBeNull();
+    $validator = Validator::make([
+        'password' => 'Valid123'
+    ], [
+        'password' => [$rule],
+    ]);
+
+    expect($validator->fails())->toBeFalse();
 });
 
 it('rejects an invalid password', function () {
     $rule = new PasswordComplexityRule(
         regex: '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/',
-        description: ['Test rule']
+        description: ['min 8 chars', 'one number']
     );
 
-    $this->expectExceptionMessage('Test rule');
+    $validator = Validator::make([
+        'password' => 'abc'
+    ], [
+        'password' => [$rule],
+    ]);
 
-    $rule->validate('password', 'weak', function ($msg) {
-        throw new Exception($msg);
-    });
+    expect($validator->fails())->toBeTrue();
 });

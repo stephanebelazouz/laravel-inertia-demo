@@ -8,6 +8,7 @@ use App\Http\Requests\Users\UserUpdateRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
+use App\Actions\Users\CreateUserAction;
 
 class UsersApiController extends Controller
 {
@@ -32,16 +33,10 @@ class UsersApiController extends Controller
     /**
      * Store a newly created user.
      */
-    public function store(UserCreateRequest $request): JsonResponse
-    {
-        $validated = $request->validated();
 
-        $user = User::create([
-            'firstname' => $validated['firstname'],
-            'lastname'  => $validated['lastname'],
-            'email'     => $validated['email'],
-            'password'  => Hash::make($validated['password']),
-        ]);
+    public function store(UserCreateRequest $request)
+    {
+        $user = (new CreateUserAction)($request->validated());
 
         return response()->json([
             'message' => 'User created successfully',
