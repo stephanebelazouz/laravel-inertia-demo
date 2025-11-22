@@ -7,11 +7,12 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import AppLayout from '@/layouts/app-layout';
-import { create, index } from '@/routes/users';
+import { index } from '@/routes/users';
 import { Head, router } from '@inertiajs/react';
 
 import { DeleteModalConfirmation } from '@/components/delete-modal-confirmation';
 import UserForm from '@/forms/user-form';
+import { edit } from '@/routes/appearance';
 import { UserCreatePayload, UsersService } from '@/services/users';
 import { BreadcrumbItem, User } from '@/types';
 import { Link } from '@inertiajs/react';
@@ -24,8 +25,8 @@ const breadcrumbs: BreadcrumbItem[] = [
         href: index().url,
     },
     {
-        title: 'Create',
-        href: create().url,
+        title: 'Edit',
+        href: edit().url,
     },
 ];
 

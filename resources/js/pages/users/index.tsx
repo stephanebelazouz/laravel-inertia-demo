@@ -63,7 +63,7 @@ export default function Index() {
                                     <TableHead className="text-right">
                                         Updated at
                                     </TableHead>
-                                    <TableHead>Voir</TableHead>
+                                    <TableHead>Actions</TableHead>
                                 </TableRow>
                             </TableHeader>
 
@@ -97,7 +97,7 @@ export default function Index() {
                                                 >
                                                     <>
                                                         <Eye className="mr-2 h-4 w-4" />
-                                                        Voir
+                                                        View
                                                     </>
                                                 </Button>
                                                 <Button
@@ -111,7 +111,7 @@ export default function Index() {
                                                 >
                                                     <>
                                                         <Pencil className="mr-2 h-4 w-4" />
-                                                        Editer
+                                                        Edit
                                                     </>
                                                 </Button>
                                             </div>

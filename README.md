@@ -10,8 +10,8 @@ Follow the steps below to install, configure, and run the application.
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repo-url>
-cd <your-project-folder>
+git clone https://github.com/stephanebelazouz/laravel-inertia-demo
+cd laravel-inertia-demo
 ```
 
 ### 2. Copy the environment file
@@ -25,7 +25,7 @@ cp .env.example .env
 Update or add the following values inside your `.env`:
 
 ```env
-# This is used for stateless authentication.
+# This is used for statefull authentication.
 # If you run app in different domain or port you should add it.
 SANCTUM_STATEFUL_DOMAINS=127.0.0.1:8000,localhost:8000,localhost,127.0.0.1
 
