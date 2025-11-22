@@ -30,7 +30,7 @@ it('displays the users list with correct pagination structure', function () {
     $response->assertInertia(
         fn($page) =>
         $page
-            ->component('users/list')
+            ->component('users/index')
             ->has('users.data')
             ->has('users.links')
     );
