@@ -22,11 +22,12 @@ cp .env.example .env
 
 ### 3. Fill in the environment variables
 
-Update the following values inside your `.env`:
+Update or add the following values inside your `.env`:
 
 ```env
-APP_NAME="MyApp"
-APP_URL="http://localhost:8000"
+# This is used for stateless authentication.
+# If you run app in different domain or port you should add it.
+SANCTUM_STATEFUL_DOMAINS=127.0.0.1:8000,localhost:8000,localhost,127.0.0.1
 
 DB_CONNECTION=sqlite
 
@@ -37,6 +38,20 @@ SEED_ADMIN_PASSWORD=Secret12345
 These will be used to create the initial seeded admin user.
 
 ---
+
+## 📦 Install and build
+
+Install composer dependencies:
+
+```bash
+composer install
+```
+
+Build frontend
+
+```bash
+npm run build
+```
 
 ## 🗄️ Database Migration & Seeding
 
@@ -65,7 +80,7 @@ Start the Laravel development server:
 php artisan serve
 ```
 
-(Optional) Start the frontend if using Vite:
+Start the frontend in dev mode using Vite:
 
 ```bash
 npm install
@@ -74,7 +89,7 @@ npm run dev
 
 The app should now be available at:
 
-    http://localhost:8000
+    http://127.0.0.1:8000
 
 ---
 
