@@ -1,11 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Users;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Users\UserCreateRequest;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 
 class UsersController extends Controller
@@ -22,12 +20,7 @@ class UsersController extends Controller
 
     public function create()
     {
-        return Inertia::render('users/create', [
-            'users' => User::select('id', 'firstname', 'lastname', 'email', 'created_at', 'updated_at')
-                ->orderBy('created_at', 'asc')
-                ->paginate(10)
-                ->withQueryString()
-        ]);
+        return Inertia::render('users/create');
     }
 
     public function edit(User $user)

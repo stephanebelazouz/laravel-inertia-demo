@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Users\UsersController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
