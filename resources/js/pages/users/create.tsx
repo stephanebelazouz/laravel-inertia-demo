@@ -35,7 +35,9 @@ export default function Create() {
             router.visit('/users');
         } catch (err: unknown) {
             console.error('Error creating user:', err);
-            if (err.response?.status === 422) {
+            const error = err as { response?: { status?: number } };
+
+            if (error.response?.status === 422) {
                 toast.error('Validation error. Please check your fields.');
             } else {
                 toast.error('An error occurred. Try again later.');

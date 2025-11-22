@@ -36,7 +36,8 @@ export default function Edit({ user }: { user: User }) {
             toast.success('User updated successfully!');
         } catch (err: unknown) {
             console.error('Error creating user:', err);
-            if (err.response?.status === 422) {
+            const error = err as { response?: { status?: number } };
+            if (error.response?.status === 422) {
                 toast.error('Validation error. Please check your fields.');
             } else {
                 toast.error('An error occurred. Try again later.');
@@ -48,9 +49,16 @@ export default function Edit({ user }: { user: User }) {
         try {
             await UsersService.delete(user.id);
             toast.success('User deleted successfully');
-            router.visit('/users'); // redirection Inertia
-        } catch (err: any) {
-            toast.error(err.response?.data?.message || 'Unable to delete user');
+            router.visit('/users');
+        } catch (err: unknown) {
+            console.error('Error deleting user:', err);
+            const error = err as {
+                response?: { status?: number; data?: { message?: string } };
+            };
+
+            toast.error(
+                error.response?.data?.message || 'Unable to delete user',
+            );
         }
     };
 
